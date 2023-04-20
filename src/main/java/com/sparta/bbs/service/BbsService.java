@@ -2,6 +2,7 @@ package com.sparta.bbs.service;
 
 
 import com.sparta.bbs.dto.BbsResponseDto;
+import com.sparta.bbs.dto.DeleteBbsDto;
 import com.sparta.bbs.repository.BbsRepository;
 import com.sparta.bbs.dto.BbsRequestDto;
 import com.sparta.bbs.entity.Bbs;
@@ -59,13 +60,16 @@ public class BbsService {
 
     // 삭제
     @Transactional
-    public String delete(Long id, String password) {
-        Bbs bbs = bbsRepository.findById(id).orElseThrow();
-        if (!bbs.getPassword().equals(password)) {
-            return "failed : 비번틀림";
+    public DeleteBbsDto delete(Long id, BbsRequestDto bbsRequestDto) {
+        Bbs bbs = bbsRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("게시글이 존재하지않습니다."));
+        DeleteBbsDto deleteBbsDto = new DeleteBbsDto();
+        if (bbsRequestDto.getPassword().equals(bbs.getPassword())) {
+            bbsRepository.deleteById(id);
+            deleteBbsDto.setMsg("success");
+        } else {
+            deleteBbsDto.setMsg("failed");
         }
-        bbsRepository.deleteById(id);
-        return "success: 성공적 삭제";
+        return deleteBbsDto;
     }
 
 }

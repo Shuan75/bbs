@@ -3,6 +3,7 @@ package com.sparta.bbs.controller;
 
 import com.sparta.bbs.dto.BbsRequestDto;
 import com.sparta.bbs.dto.BbsResponseDto;
+import com.sparta.bbs.dto.DeleteBbsDto;
 import com.sparta.bbs.entity.Bbs;
 import com.sparta.bbs.service.BbsService;
 import lombok.RequiredArgsConstructor;
@@ -43,8 +44,8 @@ public class BbsController {
     }
 
     @DeleteMapping("/api/post/{id}") // 삭제
-    public String deletePost(@PathVariable Long id, @RequestParam(value = "password" , required = false) String password) {
-        return bbsService.delete(id, password);
+    public DeleteBbsDto deletePost(@PathVariable Long id, @RequestBody BbsRequestDto bbsRequestDto) {
+        return bbsService.delete(id, bbsRequestDto);
     }
 
 }
