@@ -6,6 +6,7 @@ import com.sparta.bbs.dto.BbsResponseDto;
 import com.sparta.bbs.dto.DeleteBbsDto;
 import com.sparta.bbs.entity.Bbs;
 import com.sparta.bbs.service.BbsService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -34,18 +35,18 @@ public class BbsController {
     }
 
     @PostMapping("/api/post") // 게시글 작성
-    public BbsResponseDto createBbs(@RequestBody BbsRequestDto requestDto) {
-        return bbsService.create(requestDto);
+    public BbsResponseDto createBbs(@RequestBody BbsRequestDto requestDto, HttpServletRequest httpServletRequest) {
+        return bbsService.create(requestDto, httpServletRequest);
     }
 
     @PutMapping("/api/post/{id}") // 게시글 수정
-    public BbsResponseDto updatePosts(@PathVariable Long id, @RequestBody BbsRequestDto requestDto) {
-        return bbsService.update(id, requestDto);
+    public BbsResponseDto updatePosts(@PathVariable Long id, @RequestBody BbsRequestDto requestDto, HttpServletRequest httpServletRequest) {
+        return bbsService.update(id, requestDto, httpServletRequest);
     }
 
     @DeleteMapping("/api/post/{id}") // 삭제
-    public DeleteBbsDto deletePost(@PathVariable Long id, @RequestBody BbsRequestDto bbsRequestDto) {
-        return bbsService.delete(id, bbsRequestDto);
+    public DeleteBbsDto deletePost(@PathVariable Long id, @RequestBody BbsRequestDto bbsRequestDto, HttpServletRequest httpServletRequest) {
+        return bbsService.delete(id, bbsRequestDto, httpServletRequest);
     }
 
 }

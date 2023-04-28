@@ -2,13 +2,22 @@ package com.sparta.bbs.dto;
 
 import com.sparta.bbs.entity.Bbs;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.time.LocalDateTime;
 
 @Getter
+@Setter
+@NoArgsConstructor
 public class BbsRequestDto {
-    private String content;
-    private String password;
+    private Long id;
+//    private String password;
     private String title;
-    private String author;
+    private String content;
+
+    private LocalDateTime createdAt;
+    private LocalDateTime modifiedAt;
 
 
     public Bbs toEntity() {
@@ -19,8 +28,10 @@ public class BbsRequestDto {
         // 변경 가능성을 최소화할 수 있음
         return Bbs.builder()
                 .content(content)
-                .password(password)
+//                .password(password)
                 .title(title)
-                .author(author).build();
+                .build();
     }
+
+
 }

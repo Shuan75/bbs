@@ -23,22 +23,31 @@ public class Bbs extends Timestamped {
     private String password;
 
     @Column(nullable = false)
-    private String author;
-
-    @Column(nullable = false)
     private String title;
 
+    @Column(nullable = false)
+    private String username;
+
+    @Column(nullable = false)
+    private Long userId;
+
     @Builder
-    public Bbs(String author, String password, String title, String content) {
-        this.author = author;
+    public Bbs(String password, String title, String content) {
         this.password = password;
         this.title = title;
         this.content = content;
+
+    }
+
+    public Bbs(BbsRequestDto bbsRequestDto, Long userId) {
+        this.title = bbsRequestDto.getTitle();
+        this.content = bbsRequestDto.getContent();
+//        this.password = bbsRequestDto.getPassword();
+        this.userId = userId;
     }
 
     public void update(BbsRequestDto bbsRequestDto) {
-        this.author = bbsRequestDto.getAuthor();
-        this.password = bbsRequestDto.getPassword();
+//        this.password = bbsRequestDto.getPassword();
         this.title = bbsRequestDto.getTitle();
         this.content = bbsRequestDto.getContent();
     }

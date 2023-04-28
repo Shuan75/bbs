@@ -13,16 +13,16 @@ public class BbsResponseDto {
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
     private Long id;
-    private String author;
     private String title;
     private String content;
+    private String username;
 
     public BbsResponseDto(Bbs bbs) {
-        this.createdAt = bbs.getCreatedAt();
-        this.modifiedAt = bbs.getModifiedAt();
         this.id = bbs.getId();
-        this.author = bbs.getAuthor();
         this.title = bbs.getTitle();
         this.content = bbs.getContent();
+        this.username = bbs.getUsername();
+        this.createdAt = bbs.getCreatedAt();
+        this.modifiedAt = bbs.getModifiedAt();
     }
 }
