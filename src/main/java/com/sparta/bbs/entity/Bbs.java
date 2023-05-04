@@ -18,9 +18,9 @@ public class Bbs extends Timestamped {
     @Column(nullable = false)
     private String content;
 
-    @Column(nullable = false)
-    @JsonIgnore
-    private String password;
+//    @Column(nullable = false)
+//    @JsonIgnore
+//    private String password;
 
     @Column(nullable = false)
     private String title;
@@ -31,19 +31,12 @@ public class Bbs extends Timestamped {
     @Column(nullable = false)
     private Long userId;
 
-    @Builder
-    public Bbs(String password, String title, String content) {
-        this.password = password;
-        this.title = title;
-        this.content = content;
 
-    }
-
-    public Bbs(BbsRequestDto bbsRequestDto, Long userId) {
+    public Bbs(BbsRequestDto bbsRequestDto, Long userId, String username) {
         this.title = bbsRequestDto.getTitle();
         this.content = bbsRequestDto.getContent();
-//        this.password = bbsRequestDto.getPassword();
         this.userId = userId;
+        this.username = username;
     }
 
     public void update(BbsRequestDto bbsRequestDto) {
